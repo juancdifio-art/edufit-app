@@ -9,9 +9,9 @@ class EduFitAPI {
         const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
         
         if (isProduction) {
-            // URL base para Vercel - cambiar por la URL real de tu backend en Vercel
+            // URL base para Vercel - usar la misma URL del frontend con /api
             const frontendUrl = window.location.origin;
-            this.baseURL = ${frontendUrl}/api;
+            this.baseURL = `${frontendUrl}/api`;
         } else {
             // Para desarrollo local
             this.baseURL = 'http://localhost:3000/api';
@@ -221,4 +221,3 @@ window.EduFitAPI = new EduFitAPI();
 
 console.log('🚀 EduFitAPI cargado y listo');
 console.log('🌐 URL base:', window.EduFitAPI.baseURL);
-
