@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFit - Gestión de Rutinas para Profesores</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Contenedor principal de toda la aplicación -->
+    <div id="app">
+        
+        <!-- PANTALLA DE AUTENTICACIÓN (Login y Registro) -->
+        <!-- Esta pantalla es visible por defecto cuando el usuario no está logueado -->
+        <div id="auth-container" class="container">
+            <div class="auth-box">
+                <!-- Título y descripción de la aplicación -->
+                <div class="app-header">
+                    <h1>🏃‍♂️ EduFit</h1>
+                    <p>Sistema de gestión para profesores de educación física</p>
+                </div>
+                
+                <!-- FORMULARIO DE LOGIN -->
+                <!-- Visible por defecto, permite a usuarios existentes iniciar sesión -->
+                <div id="login-form" class="form-container">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+                            <span class="input-icon">📧</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="login-password" placeholder="Contraseña" required>
+                            <span class="input-icon">🔒</span>
+                        </div>
+                        <button type="submit" class="btn-primary">Iniciar Sesión</button>
+                    </form>
+                    
+                    <!-- Mensaje de error para login -->
+                    <div id="login-error" class="error-message hidden"></div>
+                    
+                    <!-- Link para cambiar a registro -->
+                    <p class="form-switch">
+                        ¿No tienes cuenta? 
+                        <a href="#" id="show-register">Regístrate aquí</a>
+                    </p>
+                </div>
+
+                <!-- FORMULARIO DE REGISTRO -->
+                <!-- Oculto por defecto, se muestra cuando el usuario quiere registrarse -->
+                <div id="register-form" class="form-container hidden">
+                    <h2>Registro de Profesor</h2>
+                    <form id="registerForm">
+                        <!-- Campos personales del profesor -->
+                        <div class="input-group">
+                            <input type="text" id="register-name" placeholder="Nombre" required>
+                            <span class="input-icon">👤</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="register-lastname" placeholder="Apellido" required>
+                            <span class="input-icon">👤</span>
+                        </div>
+                        <!-- Credenciales de acceso -->
+                        <div class="input-group">
+                            <input type="email" id="register-email" placeholder="Correo electrónico" required>
+                            <span class="input-icon">📧</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="register-password" placeholder="Contraseña (mín. 6 caracteres)" required minlength="6">
+                            <span class="input-icon">🔒</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="date" id="register-birthdate" placeholder="Fecha de nacimiento" required>
+                            <span class="input-icon">📅</span>
+                        </div>
+                        <button type="submit" class="btn-primary">Registrarse</button>
+                    </form>
+                    
+                    <!-- Mensaje de error para registro -->
+                    <div id="register-error" class="error-message hidden"></div>
+                    
+                    <!-- Link para volver al login -->
+                    <p class="form-switch">
+                        ¿Ya tienes cuenta? 
+                        <a href="#" id="show-login">Inicia sesión aquí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA DEL DASHBOARD (Panel principal) -->
+        <!-- Oculta por defecto, se muestra cuando el usuario está logueado -->
+        <div id="dashboard-container" class="container hidden">
+            
+            <!-- Header del dashboard con bienvenida y botón de logout -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <h1>¡Bienvenido/a, <span id="user-name-header">Profesor</span>! 👋</h1>
+                    <p class="current-date" id="current-date"></p>
+                </div>
+                <button id="logout-btn" class="btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </header>
+            
+            <!-- Contenido principal del dashboard -->
+            <main class="dashboard-content">
+                
+                <!-- Tarjeta de funcionalidades principales -->
+                <div class="features-card">
+                    <h2>🚀 Funcionalidades de EduFit</h2>
+                    <p>Accede a las herramientas principales de gestión de rutinas:</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item clickable" id="btn-crear-rutinas">
+                            <div class="feature-icon">📝</div>
+                            <div class="feature-content">
+                                <h3>Crear Rutinas</h3>
+                                <p>Diseña rutinas personalizadas para tus estudiantes</p>
+                            </div>
+                        </div>
+                        <div class="feature-item clickable" id="btn-ver-rutinas">
+                            <div class="feature-icon">👀</div>
+                            <div class="feature-content">
+                                <h3>Ver Rutinas</h3>
+                                <p>Visualiza y gestiona tus rutinas creadas (incluye opción de imprimir)</p>
+                            </div>
+                        </div>
+                        <div class="feature-item clickable" id="btn-add-exercise">
+                            <div class="feature-icon">➕</div>
+                            <div class="feature-content">
+                                <h3>Agregar Ejercicios</h3>
+                                <p>Añade nuevos ejercicios a tu biblioteca personal</p>
+                            </div>
+                        </div>
+                        <div class="feature-item clickable" id="btn-gestion-estudiantes">
+                            <div class="feature-icon">👥</div>
+                            <div class="feature-content">
+                                <h3>Gestión de Alumnos</h3>
+                                <p>Organiza y da seguimiento a tus alumnos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta de información del usuario -->
+                <div class="info-card">
+                    <h2>📋 Tu Información Personal</h2>
+                    <div class="user-info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Nombre:</span>
+                            <div class="info-edit-container">
+                                <span class="info-value" id="display-name"></span>
+                                <input type="text" id="edit-name" class="info-edit-input hidden" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Apellido:</span>
+                            <div class="info-edit-container">
+                                <span class="info-value" id="display-lastname"></span>
+                                <input type="text" id="edit-lastname" class="info-edit-input hidden" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Correo electrónico:</span>
+                            <div class="info-edit-container">
+                                <span class="info-value" id="display-email"></span>
+                                <input type="email" id="edit-email" class="info-edit-input hidden">
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Fecha de nacimiento:</span>
+                            <div class="info-edit-container">
+                                <span class="info-value" id="display-birthdate"></span>
+                                <input type="date" id="edit-birthdate" class="info-edit-input hidden">
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Edad:</span>
+                            <span class="info-value" id="display-age"></span>
+                        </div>
+                    </div>
+                    <div class="edit-controls">
+                        <button id="edit-profile-btn" class="edit-btn">✏️ Editar Información</button>
+                        <button id="save-profile-btn" class="save-btn hidden">💾 Guardar Cambios</button>
+                        <button id="cancel-profile-btn" class="cancel-btn hidden">❌ Cancelar</button>
+                    </div>
+                </div>
+                
+                <!-- Mensaje de desarrollo -->
+                <div class="dev-message">
+                    <p>
+                        <strong>🔧 Versión en desarrollo:</strong> 
+                        Esta aplicación está siendo construida paso a paso. 
+                        Actualmente funciona con almacenamiento local y pronto migraremos a Firebase.
+                    </p>
+                </div>
+            </main>
+        </div>
+        
+        <!-- PANTALLA DE CREAR RUTINAS -->
+        <!-- Oculta por defecto, se muestra cuando se hace clic en "Crear Rutinas" -->
+        <div id="create-routine-container" class="container hidden">
+            
+            <!-- Header con navegación -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <button id="btn-back-dashboard" class="btn-back">← Volver al Dashboard</button>
+                    <h1>📝 Crear Nueva Rutina</h1>
+                </div>
+                <button id="logout-btn-routine" class="btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </header>
+            
+            <!-- Contenido de crear rutina -->
+            <main class="routine-creator-content">
+                
+                <!-- Formulario de información básica de la rutina -->
+                <div class="routine-info-card">
+                    <h2>ℹ️ Información de la Rutina</h2>
+                    
+                    <form id="routine-basic-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="routine-name">Nombre de la rutina *</label>
+                                <input type="text" id="routine-name" placeholder="Ej: Rutina de Fuerza Básica" required>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="routine-intensity">Nivel de intensidad *</label>
+                                <select id="routine-intensity" required>
+                                    <option value="">Selecciona un nivel</option>
+                                    <option value="BAJA">🟢 Baja</option>
+                                    <option value="MEDIA">🟡 Media</option>
+                                    <option value="ALTA">🔴 Alta</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="routine-description">Descripción (opcional)</label>
+                            <textarea id="routine-description" rows="3" placeholder="Describe el objetivo de esta rutina..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Selector de ejercicios -->
+                <div class="exercise-selector-card">
+                    <h2>🏋️ Agregar Ejercicios</h2>
+                    <p>Selecciona los ejercicios que formarán parte de tu rutina:</p>
+                    
+                    <!-- Filtros de ejercicios -->
+                    <div class="exercise-filters">
+                        <button class="filter-btn active" data-category="todos">Todos</button>
+                        <button class="filter-btn" data-category="Fuerza">💪 Fuerza</button>
+                        <button class="filter-btn" data-category="Cardio">❤️ Cardio</button>
+                        <button class="filter-btn" data-category="Core">🎯 Core</button>
+                        <button class="filter-btn" data-category="Funcional">⚡ Funcional</button>
+                    </div>
+                    
+                    <!-- Lista de ejercicios disponibles -->
+                    <div id="exercises-list" class="exercises-grid">
+                        <!-- Los ejercicios se cargan dinámicamente aquí -->
+                    </div>
+                </div>
+                
+                <!-- Rutina en construcción -->
+                <div class="routine-builder-card">
+                    <h2>📋 Tu Rutina</h2>
+                    <div class="routine-summary">
+                        <span id="routine-exercise-count">0 ejercicios</span> • 
+                        <span id="routine-estimated-time">0 min estimados</span>
+                    </div>
+                    
+                    <!-- Lista de ejercicios seleccionados -->
+                    <div id="selected-exercises-list" class="selected-exercises">
+                        <div class="empty-routine">
+                            <p>🎯 Agrega ejercicios para comenzar a crear tu rutina</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Botones de acción -->
+                    <div class="routine-actions">
+                        <button id="btn-preview-routine" class="btn-secondary" disabled>
+                            👁️ Vista Previa
+                        </button>
+                        <button id="btn-save-routine" class="btn-primary" disabled>
+                            💾 Guardar Rutina
+                        </button>
+                    </div>
+                </div>
+                
+            </main>
+        </div>
+        
+        <!-- PANTALLA DE VER RUTINAS -->
+        <!-- Oculta por defecto, se muestra cuando se hace clic en "Ver Rutinas" -->
+        <div id="view-routines-container" class="container hidden">
+            
+            <!-- Header con navegación -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <button id="btn-back-dashboard-view" class="btn-back">← Volver al Dashboard</button>
+                    <h1>👀 Mis Rutinas</h1>
+                </div>
+                <button id="logout-btn-view" class="btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </header>
+            
+            <!-- Contenido de ver rutinas -->
+            <main class="view-routines-content">
+                
+                <!-- Estadísticas y controles -->
+                <div class="routines-stats-card">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-routines">0</div>
+                            <div class="stat-label">Rutinas Creadas</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controles de filtrado -->
+                    <div class="routines-controls">
+                        <div class="filter-controls">
+                            <select id="intensity-filter">
+                                <option value="">Todas las intensidades</option>
+                                <option value="BAJA">🟢 Baja</option>
+                                <option value="MEDIA">🟡 Media</option>
+                                <option value="ALTA">🔴 Alta</option>
+                            </select>
+                            
+                            <select id="routine-selector">
+                                <option value="">Todas las rutinas</option>
+                                <!-- Las opciones se cargan dinámicamente -->
+                            </select>
+                            
+                            <button id="btn-create-new-routine" class="btn-primary">
+                                ➕ Nueva Rutina
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de rutinas -->
+                <div class="routines-list-card">
+                    <h2>📋 Tus Rutinas</h2>
+                    
+                    <!-- Lista de rutinas (se carga dinámicamente) -->
+                    <div id="routines-list" class="routines-grid">
+                        <!-- Las rutinas se cargan aquí -->
+                    </div>
+                    
+                    <!-- Mensaje cuando no hay rutinas -->
+                    <div id="no-routines-message" class="empty-state hidden">
+                        <div class="empty-icon">📝</div>
+                        <h3>¡Aún no tienes rutinas!</h3>
+                        <p>Crea tu primera rutina para comenzar a organizar tus entrenamientos.</p>
+                        <button id="btn-create-first-routine" class="btn-primary">
+                            ➕ Crear Mi Primera Rutina
+                        </button>
+                    </div>
+                </div>
+                
+            </main>
+        </div>
+        
+        <!-- MODAL DE DETALLES DE RUTINA -->
+        <!-- Se muestra cuando se hace clic en "Ver detalles" -->
+        <div id="routine-details-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-routine-title">Detalles de la Rutina</h2>
+                    <button id="close-modal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body" id="modal-routine-content">
+                    <!-- Contenido del modal se carga dinámicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-print-routine" class="btn-secondary">🖨️ Imprimir</button>
+                    <button id="btn-edit-routine" class="btn-primary">✏️ Editar</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANTALLA DE AGREGAR EJERCICIO -->
+        <!-- Oculta por defecto, se muestra cuando se hace clic en "Agregar Ejercicio" -->
+        <div id="add-exercise-container" class="container hidden">
+            
+            <!-- Header con navegación -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <button id="back-to-dashboard-from-add-exercise" class="btn-back">← Volver al Dashboard</button>
+                    <h1>➕ Agregar Nuevo Ejercicio</h1>
+                </div>
+                <button id="btn-logout-from-add-exercise" class="btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </header>
+            
+            <main class="main-content">
+                
+                <!-- Formulario de nuevo ejercicio -->
+                <div class="exercise-form-card">
+                    <h2>🏋️ Crear Ejercicio Personalizado</h2>
+                    <p>Define un nuevo ejercicio con sus características y valores por defecto.</p>
+                    
+                    <form id="add-exercise-form" class="exercise-form">
+                        
+                        <!-- Información básica -->
+                        <div class="form-section">
+                            <h3>📝 Información Básica</h3>
+                            
+                            <div class="form-group">
+                                <label for="exercise-name">Nombre del Ejercicio *</label>
+                                <input type="text" id="exercise-name" name="name" required 
+                                       placeholder="Ej: Flexiones diamante" maxlength="50">
+                                <small class="form-help">Máximo 50 caracteres</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exercise-description">Descripción *</label>
+                                <textarea id="exercise-description" name="description" required 
+                                          placeholder="Describe el ejercicio, músculos trabajados y técnica básica..."
+                                          maxlength="200" rows="3"></textarea>
+                                <small class="form-help">Máximo 200 caracteres</small>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exercise-category">Categoría *</label>
+                                    <select id="exercise-category" name="category" required>
+                                        <option value="">Selecciona una categoría</option>
+                                        <option value="Fuerza">💪 Fuerza</option>
+                                        <option value="Cardio">❤️ Cardio</option>
+                                        <option value="Core">🎯 Core</option>
+                                        <option value="Funcional">⚡ Funcional</option>
+                                        <option value="Flexibilidad">🤸 Flexibilidad</option>
+                                        <option value="Equilibrio">⚖️ Equilibrio</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exercise-icon">Icono *</label>
+                                    <select id="exercise-icon" name="icon" required>
+                                        <option value="">Selecciona un icono</option>
+                                        <option value="💪">💪 Fuerza</option>
+                                        <option value="🏃‍♂️">🏃‍♂️ Correr</option>
+                                        <option value="🤸‍♂️">🤸‍♂️ Saltar</option>
+                                        <option value="🏋️‍♂️">🏋️‍♂️ Pesas</option>
+                                        <option value="🤾‍♂️">🤾‍♂️ Deportivo</option>
+                                        <option value="🧘‍♂️">🧘‍♂️ Yoga</option>
+                                        <option value="🔥">🔥 Intenso</option>
+                                        <option value="💥">💥 Explosivo</option>
+                                        <option value="⚡">⚡ Dinámico</option>
+                                        <option value="🎯">🎯 Precisión</option>
+                                        <option value="🦵">🦵 Piernas</option>
+                                        <option value="🏔️">🏔️ Escalada</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Configuración de series -->
+                        <div class="form-section">
+                            <h3>⚙️ Configuración de Series</h3>
+                            
+                            <div class="form-group">
+                                <label for="exercise-type">Tipo de Serie *</label>
+                                <select id="exercise-type" name="type" required>
+                                    <option value="">Selecciona el tipo</option>
+                                    <option value="repeticiones">🔢 Por Repeticiones</option>
+                                    <option value="tiempo">⏱️ Por Tiempo (segundos)</option>
+                                </select>
+                                <small class="form-help">Define si el ejercicio se mide por repeticiones o tiempo</small>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exercise-default-series">Series por Defecto *</label>
+                                    <input type="number" id="exercise-default-series" name="defaultSeries" 
+                                           min="1" max="10" value="3" required>
+                                    <small class="form-help">1-10 series</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exercise-default-value">
+                                        <span id="value-label">Repeticiones por Defecto *</span>
+                                    </label>
+                                    <input type="number" id="exercise-default-value" name="defaultValue" 
+                                           min="1" max="300" value="12" required>
+                                    <small id="value-help" class="form-help">1-50 repeticiones</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exercise-default-rest">Descanso (segundos) *</label>
+                                    <input type="number" id="exercise-default-rest" name="defaultRest" 
+                                           min="0" max="300" step="15" value="60" required>
+                                    <small class="form-help">0-300 segundos</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Vista previa del ejercicio -->
+                        <div class="form-section">
+                            <h3>👁️ Vista Previa</h3>
+                            <div id="exercise-preview" class="exercise-preview">
+                                <div class="exercise-preview-card">
+                                    <div class="exercise-preview-header">
+                                        <span class="exercise-preview-icon">❓</span>
+                                        <div>
+                                            <div class="exercise-preview-name">Nombre del ejercicio</div>
+                                            <small class="exercise-preview-category">Categoría • Tipo</small>
+                                        </div>
+                                    </div>
+                                    <p class="exercise-preview-description">Descripción del ejercicio</p>
+                                    <div class="exercise-preview-defaults">
+                                        <span><strong>Por defecto:</strong> <span id="preview-series">3</span> series</span>
+                                        <span><strong id="preview-value-type">Repeticiones:</strong> <span id="preview-value">12</span></span>
+                                        <span><strong>Descanso:</strong> <span id="preview-rest">60</span>s</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de acción -->
+                        <div class="form-actions">
+                            <button type="button" id="btn-cancel-exercise" class="btn-secondary">
+                                ❌ Cancelar
+                            </button>
+                            <button type="submit" id="btn-save-exercise" class="btn-primary">
+                                💾 Guardar Ejercicio
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </main>
+        </div>
+        
+        <!-- INDICADOR DE CARGA -->
+        <!-- Se muestra durante operaciones que toman tiempo (login, registro, etc.) -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Procesando...</p>
+            </div>
+        </div>
+        
+        <!-- PANTALLA DE GESTIÓN DE ESTUDIANTES -->
+        <!-- Oculta por defecto, se muestra cuando se hace clic en "Gestión de Estudiantes" -->
+        <div id="student-management-container" class="container hidden">
+            
+            <!-- Header con navegación -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <button id="back-to-dashboard-from-students" class="btn-back">← Volver al Dashboard</button>
+                    <h1>👥 Gestión de Alumnos</h1>
+                </div>
+                <button id="btn-logout-from-students" class="btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </header>
+            
+            <main class="main-content">
+                
+                <!-- Formulario para agregar nuevo estudiante -->
+                <div class="student-form-card">
+                    <h2>➕ Agregar Nuevo Alumno</h2>
+                    <p>Registra un nuevo alumno con su información básica y observaciones.</p>
+                    
+                    <form id="add-student-form" class="student-form">
+                        
+                        <!-- Información personal -->
+                        <div class="form-section">
+                            <h3>👤 Información Personal</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="student-name">Nombre *</label>
+                                    <input type="text" id="student-name" name="name" required 
+                                           placeholder="Ej: Juan" maxlength="30">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="student-lastname">Apellido *</label>
+                                    <input type="text" id="student-lastname" name="lastname" required 
+                                           placeholder="Ej: Pérez" maxlength="30">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="student-birthdate">Fecha de Nacimiento *</label>
+                                    <input type="date" id="student-birthdate" name="birthdate" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="student-grade">Horario</label>
+                                    <input type="text" id="student-grade" name="grade" 
+                                           placeholder="Ej: Lunes 8:00-9:00, Personalizado 15:00-16:00" maxlength="30">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Información médica y física -->
+                        <div class="form-section">
+                            <h3>🏥 Información Médica y Física</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="student-height">Estatura (cm)</label>
+                                    <input type="number" id="student-height" name="height" 
+                                           placeholder="Ej: 165" min="100" max="250">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="student-weight">Peso (kg)</label>
+                                    <input type="number" id="student-weight" name="weight" 
+                                           placeholder="Ej: 55" min="20" max="200" step="0.1">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="student-medical-conditions">Condiciones Médicas</label>
+                                <textarea id="student-medical-conditions" name="medicalConditions" 
+                                          placeholder="Alergias, lesiones, limitaciones físicas, medicamentos..."
+                                          maxlength="300" rows="2"></textarea>
+                                <small class="form-help">Máximo 300 caracteres</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Observaciones del profesor -->
+                        <div class="form-section">
+                            <h3>📝 Observaciones del Profesor</h3>
+                            
+                            <div class="form-group">
+                                <label for="student-observations">Observaciones Generales</label>
+                                <textarea id="student-observations" name="observations" 
+                                          placeholder="Comportamiento, rendimiento, actitud, fortalezas, áreas de mejora..."
+                                          maxlength="500" rows="4"></textarea>
+                                <small class="form-help">Máximo 500 caracteres</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="student-fitness-level">Nivel de Condición Física</label>
+                                <select id="student-fitness-level" name="fitnessLevel">
+                                    <option value="">Seleccionar nivel</option>
+                                    <option value="BAJO">🟢 Bajo</option>
+                                    <option value="MEDIO">🟡 Medio</option>
+                                    <option value="ALTO">🔴 Alto</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones del formulario -->
+                        <div class="form-actions">
+                            <button type="button" id="btn-cancel-student" class="btn-secondary">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                Guardar Alumno
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Lista de estudiantes -->
+                <div class="students-list-card">
+                    <div class="students-header">
+                        <h2>📋 Lista de Alumnos</h2>
+                        <div class="students-stats">
+                            <span id="students-count">0 alumnos registrados</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros de estudiantes -->
+                    <div class="students-filters">
+                        <div class="filter-group">
+                            <label for="filter-grade">Filtrar por Horario:</label>
+                            <select id="filter-grade">
+                                <option value="">Todos los horarios</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-fitness">Filtrar por Condición Física:</label>
+                            <select id="filter-fitness">
+                                <option value="">Todos los niveles</option>
+                                <option value="BAJO">🟢 Bajo</option>
+                                <option value="MEDIO">🟡 Medio</option>
+                                <option value="ALTO">🔴 Alto</option>
+                            </select>
+                        </div>
+                        
+                        <button id="btn-clear-filters" class="btn-secondary">Limpiar Filtros</button>
+                    </div>
+                    
+                    <!-- Lista de alumnos en formato tabla -->
+                    <div class="students-table-container">
+                        <table id="students-table" class="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Horario</th>
+                                    <th>Edad</th>
+                                    <th>Estatura</th>
+                                    <th>Peso</th>
+                                    <th>Condición Física</th>
+                                    <th>Observaciones</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-list">
+                                <!-- Los alumnos se cargarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Mensaje cuando no hay estudiantes -->
+                    <div id="no-students-message" class="no-data-message hidden">
+                        <div class="no-data-icon">👥</div>
+                        <h3>No hay alumnos registrados</h3>
+                        <p>Comienza agregando tu primer alumno usando el formulario de arriba.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- NOTIFICACIONES -->
+        <!-- Para mostrar mensajes de éxito o información al usuario -->
+        <div id="notification" class="notification hidden">
+            <span id="notification-text"></span>
+            <button id="notification-close">×</button>
+        </div>
+    </div>
+
+    <!-- Estilos adicionales para edición de información -->
+    <style>
+        .info-edit-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-edit-input {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .edit-btn, .save-btn, .cancel-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .edit-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .save-btn {
+            color: #28a745;
+        }
+        
+        .save-btn:hover {
+            background-color: #d4edda;
+        }
+        
+        .cancel-btn {
+            color: #dc3545;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #f8d7da;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .edit-controls {
+            margin-top: 20px;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .edit-controls .edit-btn,
+        .edit-controls .save-btn,
+        .edit-controls .cancel-btn {
+            margin: 0 5px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    </style>
+
+    <!-- Scripts de la aplicación -->
+    <script src="clear-cache.js?v=1"></script>
+    <script src="api-client-fixed.js?v=1"></script>
+    <script src="app.js?v=5"></script>
+</body>
+</html>

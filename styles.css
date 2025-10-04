@@ -1,0 +1,2151 @@
+/* ===================================
+   RESET Y CONFIGURACIÓN GENERAL
+   =================================== */
+
+/* Reset básico para eliminar márgenes y paddings por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configuración base del body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Clase utility para ocultar elementos */
+.hidden {
+    display: none !important;
+}
+
+/* ===================================
+   CONTENEDORES PRINCIPALES
+   =================================== */
+
+/* Contenedor base que centra el contenido */
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Contenedor específico del dashboard */
+#dashboard-container.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Contenedor específico de crear rutinas */
+#create-routine-container.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Contenedor específico de ver rutinas */
+#view-routines-container.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* ===================================
+   ESTILOS DE AUTENTICACIÓN
+   =================================== */
+
+/* Caja principal que contiene los formularios de auth */
+.auth-box {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Header de la aplicación (título y descripción) */
+.app-header h1 {
+    color: #667eea;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.app-header p {
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Títulos de los formularios */
+.form-container h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* ===================================
+   ESTILOS DE FORMULARIOS
+   =================================== */
+
+/* Contenedor de cada formulario */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grupo de input (input + icono) */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos base de los inputs */
+.input-group input {
+    width: 100%;
+    padding: 15px 50px 15px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+/* Estado focus de los inputs */
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Iconos dentro de los inputs */
+.input-icon {
+    position: absolute;
+    right: 15px;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Estilo especial para el input de fecha */
+.date-label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: white;
+    padding: 0 5px;
+    font-size: 0.8rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* ===================================
+   BOTONES
+   =================================== */
+
+/* Botón principal (login, registro) */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Botón de logout */
+.btn-logout {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* ===================================
+   MENSAJES Y NOTIFICACIONES
+   =================================== */
+
+/* Mensajes de error */
+.error-message {
+    background: #ffe6e6;
+    color: #d63031;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #d63031;
+    font-size: 0.9rem;
+}
+
+/* Links para cambiar entre formularios */
+.form-switch {
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.form-switch a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.form-switch a:hover {
+    color: #5a67d8;
+    text-decoration: underline;
+}
+
+/* ===================================
+   ESTILOS DEL DASHBOARD
+   =================================== */
+
+/* Contenedor del dashboard */
+#dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Header del dashboard */
+.dashboard-header {
+    background: white;
+    width: 100%;
+    padding: 25px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.welcome-section h1 {
+    color: #333;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.current-date {
+    color: #666;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Contenido principal del dashboard */
+.dashboard-content {
+    max-width: 1000px;
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* ===================================
+   TARJETAS DEL DASHBOARD
+   =================================== */
+
+/* Estilos base para todas las tarjetas */
+.info-card, .features-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Títulos de las tarjetas */
+.info-card h2, .features-card h2 {
+    color: #667eea;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ===================================
+   INFORMACIÓN DEL USUARIO
+   =================================== */
+
+/* Grid de información personal */
+.user-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.info-item {
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.info-label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* ===================================
+   FUNCIONALIDADES FUTURAS
+   =================================== */
+
+.features-card p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* Grid de funcionalidades */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f9ff;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feature-content h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.feature-content p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ===================================
+   MENSAJE DE DESARROLLO
+   =================================== */
+
+.dev-message {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+    text-align: center;
+}
+
+.dev-message p {
+    color: #555;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ===================================
+   LOADING Y NOTIFICACIONES
+   =================================== */
+
+/* Overlay de carga */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.loading-content {
+    text-align: center;
+    color: #667eea;
+}
+
+/* Spinner de carga */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e1e5e9;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Notificaciones */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .auth-box {
+        padding: 30px 25px;
+        margin: 10px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .welcome-section h1 {
+        font-size: 1.6rem;
+    }
+    
+    .dashboard-content {
+        padding: 20px 15px;
+    }
+    
+    .user-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .auth-box {
+        padding: 25px 20px;
+    }
+    
+    .app-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .input-group input {
+        padding: 12px 40px 12px 12px;
+        font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    
+    .info-card, .features-card {
+        padding: 25px 20px;
+    }
+    
+    .feature-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* ===================================
+   ESTILOS PARA CREAR RUTINAS
+   =================================== */
+
+/* Contenedor principal del creador de rutinas */
+.routine-creator-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* Botón de volver */
+.btn-back {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #5a67d8;
+}
+
+/* Tarjetas del creador de rutinas */
+.routine-info-card,
+.exercise-selector-card,
+.routine-builder-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.routine-info-card h2,
+.exercise-selector-card h2,
+.routine-builder-card h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Formulario de información básica */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Filtros de ejercicios */
+.exercise-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #f8f9fa;
+    border: 2px solid #e1e5e9;
+    color: #666;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #e9ecef;
+}
+
+.filter-btn.active {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+/* Grid de ejercicios */
+.exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.exercise-card {
+    background: #f8f9ff;
+    border: 2px solid #e1e5e9;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.exercise-card:hover {
+    border-color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+}
+
+.exercise-card.selected {
+    border-color: #4caf50;
+    background: #e8f5e8;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.exercise-icon {
+    font-size: 1.8rem;
+}
+
+.exercise-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.exercise-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #667eea;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.exercise-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.exercise-defaults {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.exercise-defaults strong {
+    color: #333;
+}
+
+/* Rutina en construcción */
+.routine-summary {
+    background: #f0f4ff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.selected-exercises {
+    min-height: 200px;
+}
+
+.empty-routine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #999;
+    font-style: italic;
+}
+
+.selected-exercise-item {
+    background: #f8f9ff;
+    border: 2px solid #667eea;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-exercise-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.selected-exercise-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.selected-exercise-config {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.config-input {
+    width: 60px;
+    padding: 5px 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.remove-exercise {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.remove-exercise:hover {
+    background: #ff5252;
+}
+
+/* Botones de acción */
+.routine-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+}
+
+.btn-secondary:disabled,
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Estilos para elementos clickeables */
+.clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.clickable:hover {
+    transform: scale(1.02);
+}
+
+/* ===================================
+   RESPONSIVE PARA RUTINAS
+   =================================== */
+
+@media (max-width: 768px) {
+    .routine-creator-content {
+        padding: 20px 15px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .exercise-filters {
+        justify-content: center;
+    }
+    
+    .exercises-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .selected-exercise-item {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .selected-exercise-config {
+        justify-content: center;
+    }
+    
+    .routine-actions {
+        flex-direction: column;
+    }
+}
+
+/* ===================================
+   ESTILOS PARA VER RUTINAS
+   =================================== */
+
+/* Contenedor principal de ver rutinas */
+.view-routines-content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* Tarjeta de estadísticas */
+.routines-stats-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Controles de rutinas */
+.routines-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-controls select {
+    padding: 10px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.filter-controls select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Tarjeta de lista de rutinas */
+.routines-list-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.routines-list-card h2 {
+    color: #667eea;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* Grid de rutinas */
+.routines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.routine-card {
+    background: #f8f9ff;
+    border: 2px solid #e1e5e9;
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.routine-card:hover {
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+}
+
+.routine-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.routine-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.routine-intensity {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.routine-intensity.BAJA {
+    background: #4caf50;
+}
+
+.routine-intensity.MEDIA {
+    background: #ff9800;
+}
+
+.routine-intensity.ALTA {
+    background: #f44336;
+}
+
+.routine-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.routine-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+}
+
+.routine-stat {
+    text-align: center;
+}
+
+.routine-stat-number {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.routine-stat-label {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.routine-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.btn-routine-action {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-view {
+    background: #667eea;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #5a67d8;
+}
+
+.btn-print {
+    background: #f8f9fa;
+    color: #667eea;
+    border: 1px solid #667eea;
+}
+
+.btn-print:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-delete {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #ff5252;
+}
+
+/* Estado vacío */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* ===================================
+   MODAL DE DETALLES
+   =================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid #e1e5e9;
+    background: #f8f9ff;
+}
+
+.modal-header h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #e1e5e9;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.routine-detail-info {
+    background: #f0f4ff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.routine-detail-exercises {
+    margin-top: 20px;
+}
+
+.exercise-detail-item {
+    background: #f8f9ff;
+    border: 1px solid #e1e5e9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.exercise-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.exercise-detail-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.exercise-detail-config {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ===================================
+   RESPONSIVE PARA VER RUTINAS
+   =================================== */
+
+@media (max-width: 768px) {
+    .view-routines-content {
+        padding: 20px 15px;
+    }
+    
+    .routines-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-controls select {
+        width: 100%;
+    }
+    
+    .routines-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .routine-actions {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        justify-content: center;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+}
+
+/* ===================================
+   ANIMACIONES ADICIONALES
+   =================================== */
+
+/* Animación suave para mostrar/ocultar elementos */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effects para mejor interactividad */
+.info-card:hover, .features-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+/* ===================================
+   OCULTAR BOTÓN NUEVA RUTINA
+   =================================== */
+
+/* Ocultar el botón "Nueva Rutina" en la pantalla Ver Rutinas */
+#btn-create-new-routine {
+    display: none !important;
+}
+
+/* ===================================
+   CORRECCIÓN LAYOUT - PANTALLAS COMPLEJAS
+   =================================== */
+
+/* Solución para pantallas con header + contenido (según agent.md) */
+#create-routine-container.container,
+#view-routines-container.container,
+#add-exercise-container.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* ===================================
+   PANTALLA AGREGAR EJERCICIO
+   =================================== */
+
+.exercise-form-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.exercise-form-card h2 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.exercise-form-card > p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h3 {
+    color: #34495e;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-help {
+    display: block;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Vista previa del ejercicio */
+.exercise-preview {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.exercise-preview-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+.exercise-preview-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.exercise-preview-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+}
+
+.exercise-preview-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.exercise-preview-category {
+    color: #666;
+}
+
+.exercise-preview-description {
+    color: #555;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.exercise-preview-defaults {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.exercise-preview-defaults span {
+    color: #666;
+}
+
+/* Botones de acción del formulario */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    margin-top: 2rem;
+}
+
+.form-actions .btn-secondary,
+.form-actions .btn-primary {
+    padding: 0.75rem 2rem;
+    min-width: 150px;
+}
+
+/* Estados de validación */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+    border-color: #e74c3c;
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+    border-color: #27ae60;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .exercise-form-card {
+        padding: 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn-secondary,
+    .form-actions .btn-primary {
+        width: 100%;
+    }
+    
+    .exercise-preview-defaults {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ===================================
+   GESTIÓN DE ESTUDIANTES
+   =================================== */
+
+/* Contenedor principal de gestión de estudiantes */
+#student-management-container.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Tarjeta del formulario de estudiantes */
+.student-form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+}
+
+.student-form-card h2 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.student-form-card p {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Formulario de estudiantes */
+.student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section {
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #f8f9fa;
+}
+
+.form-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group input:invalid {
+    border-color: #e74c3c;
+}
+
+.form-group input:valid {
+    border-color: #27ae60;
+}
+
+.form-help {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 0.25rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 1px solid #e1e5e9;
+}
+
+/* Tarjeta de lista de estudiantes */
+.students-list-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+}
+
+.students-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e1e5e9;
+}
+
+.students-header h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.students-stats {
+    background: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Filtros de estudiantes */
+.students-filters {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.filter-group select {
+    padding: 0.5rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: white;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Contenedor de tabla de estudiantes */
+.students-table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #e1e5e9;
+    background: white;
+}
+
+/* Tabla de estudiantes */
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.students-table th {
+    background: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+    text-align: left;
+    border-bottom: 2px solid #e1e5e9;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.students-table td {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid #e1e5e9;
+    vertical-align: top;
+}
+
+.students-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.students-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilos específicos para celdas de la tabla */
+.students-table .student-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.students-table .student-grade {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+.students-table .student-age {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.students-table .student-measurements {
+    color: #5a6c7d;
+    font-size: 0.85rem;
+}
+
+.students-table .student-observations {
+    max-width: 200px;
+    font-size: 0.85rem;
+    color: #5a6c7d;
+    line-height: 1.4;
+}
+
+.students-table .student-observations.short {
+    max-width: 150px;
+}
+
+.students-table .student-actions {
+    white-space: nowrap;
+}
+
+.students-table .btn-edit-student,
+.students-table .btn-delete-student {
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+.students-table .btn-edit-student {
+    background: #3498db;
+    color: white;
+}
+
+.students-table .btn-edit-student:hover {
+    background: #2980b9;
+}
+
+.students-table .btn-delete-student {
+    background: #e74c3c;
+    color: white;
+}
+
+.students-table .btn-delete-student:hover {
+    background: #c0392b;
+}
+
+/* Tarjeta individual de estudiante */
+.student-card {
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.student-card:hover {
+    border-color: #3498db;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+    transform: translateY(-2px);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.student-info h3 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.student-info .student-grade {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.student-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit-student,
+.btn-delete-student {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.btn-edit-student {
+    background: #3498db;
+    color: white;
+}
+
+.btn-edit-student:hover {
+    background: #2980b9;
+}
+
+.btn-delete-student {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-delete-student:hover {
+    background: #c0392b;
+}
+
+/* Información del estudiante */
+.student-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Niveles de condición física y participación */
+.fitness-level,
+.participation-level {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.fitness-level.BAJO,
+.participation-level.BAJO {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.fitness-level.MEDIO,
+.participation-level.MEDIO {
+    background: #fef5e7;
+    color: #f39c12;
+}
+
+.fitness-level.ALTO,
+.participation-level.ALTO {
+    background: #fadbd8;
+    color: #e74c3c;
+}
+
+/* Observaciones del estudiante */
+.student-observations {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 4px solid #3498db;
+}
+
+.student-observations h4 {
+    color: #2c3e50;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.student-observations p {
+    color: #5a6c7d;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.student-observations .observations-text {
+    font-style: italic;
+}
+
+.student-observations .medical-conditions {
+    background: #fff3cd;
+    border-left-color: #ffc107;
+    margin-top: 0.5rem;
+}
+
+.student-observations .medical-conditions h4 {
+    color: #856404;
+}
+
+.student-observations .medical-conditions p {
+    color: #856404;
+}
+
+/* Mensaje cuando no hay estudiantes */
+.no-data-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #7f8c8d;
+}
+
+.no-data-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-data-message h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.no-data-message p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Responsive para gestión de estudiantes */
+@media (max-width: 768px) {
+    .student-form-card,
+    .students-list-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .students-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .students-table-container {
+        font-size: 0.8rem;
+    }
+    
+    .students-table th,
+    .students-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .students-table .student-observations {
+        max-width: 120px;
+        font-size: 0.75rem;
+    }
+    
+    .students-table .btn-edit-student,
+    .students-table .btn-delete-student {
+        padding: 0.3rem 0.4rem;
+        font-size: 0.7rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn-secondary,
+    .form-actions .btn-primary {
+        width: 100%;
+    }
+    
+    .students-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .student-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .student-actions {
+        align-self: flex-end;
+    }
+}
