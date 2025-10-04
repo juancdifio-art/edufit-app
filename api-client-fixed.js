@@ -6,19 +6,25 @@
 class EduFitAPI {
     constructor() {
         // Detectar si estamos en producción (Vercel) o desarrollo
-        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+        const hostname = window.location.hostname;
+        const isProduction = hostname.includes('vercel.app') || hostname.includes('netlify.app') || (hostname !== 'localhost' && hostname !== '127.0.0.1');
+        
+        console.log('🔍 Hostname detectado:', hostname);
+        console.log('🔍 Es producción:', isProduction);
         
         if (isProduction) {
             // URL base para Vercel - usar la misma URL del frontend con /api
             const frontendUrl = window.location.origin;
             this.baseURL = `${frontendUrl}/api`;
+            console.log('🌐 Usando URL de producción:', this.baseURL);
         } else {
             // Para desarrollo local
             this.baseURL = 'http://localhost:3000/api';
+            console.log('🌐 Usando URL de desarrollo:', this.baseURL);
         }
         
         console.log('🌐 Modo:', isProduction ? 'PRODUCCIÓN' : 'DESARROLLO');
-        console.log('🔗 URL base:', this.baseURL);
+        console.log('🔗 URL base final:', this.baseURL);
         
         this.token = localStorage.getItem('edufit_token');
     }
@@ -30,6 +36,7 @@ class EduFitAPI {
         const url = `${this.baseURL}${endpoint}`;
         
         console.log('🌐 Haciendo petición:', endpoint, options);
+        console.log('🌐 URL completa:', url);
         
         const config = {
             headers: {
